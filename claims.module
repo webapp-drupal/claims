@@ -38,11 +38,14 @@ function claims_theme($existing, $type, $theme, $path) {
  * Implements hook_preprocess_node().
  */
 function claims_preprocess_node(&$variables) {
-  $nid = $variables['node']->id();
-  $connection = \Drupal::database();
+  $node = $variables['node'];
+  if ($node->getType() == 'partners') {
+    $nid = $node->id();
+    $connection = \Drupal::database();
 
-  $query = $connection->query('SELECT voucher_code FROM {claim_codes} WHERE partner = :nid LIMIT 1', [':nid' => $nid]);
-  $code = $query->fetchField();
+    $query = $connection->query('SELECT voucher_code FROM {claim_codes} WHERE partner = :nid LIMIT 1', [':nid' => $nid]);
+    $code = $query->fetchField();
 
-  $variables['voucher_code'] = $code;
+    $variables['voucher_code'] = $code;
+  }
 }
