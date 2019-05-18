@@ -1,0 +1,23 @@
+claims.upload_claim_codes:
+  path: '/claims/form/upload_claim_codes'
+  defaults:
+    _form: '\Drupal\claims\Form\UploadClaimCodes'
+    _title: 'UploadClaimCodes'
+  requirements:
+    _access: 'TRUE'
+
+claims.claim_voucher_controller_display:
+  path: '/claim-voucher'
+  defaults:
+    _controller: '\Drupal\claims\Controller\ClaimVoucherController::display'
+    _title: 'Display'
+  requirements:
+    _permission: 'access content'
+
+claims.claim_link:
+  path: '/claim-link/{nid}'
+  defaults:
+    _controller: '\Drupal\claims\Controller\ClaimVoucherController::link'
+    _title: 'Link'
+  requirements:
+    _permission: 'access content'
