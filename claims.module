@@ -42,8 +42,8 @@ function computed_field_field_voucher_code_compute($entity_type_manager, $entity
   $nid = $entity->id();
   $connection = \Drupal::database();
 
-  $query = $connection->query('SELECT voucher_code FROM {claim_codes} WHERE partner = :nid LIMIT 1', [':nid' => $nid]);
-  $code = $query->fetchField();
+  $query = $connection->query('SELECT voucher_code FROM {claim_codes} WHERE partner = :nid AND used = 0 LIMIT 1', [':nid' => $nid]);
+  $value = $query->fetchField();
 
-  return $code;
+  return $value;
 }
