@@ -1,5 +1,5 @@
 claims.upload_claim_codes:
-  path: '/claims/form/upload_claim_codes'
+  path: '/admin/claim_codes_upload'
   defaults:
     _form: '\Drupal\claims\Form\UploadClaimCodes'
     _title: 'UploadClaimCodes'
@@ -12,7 +12,7 @@ claims.claim_voucher_controller_display:
     _controller: '\Drupal\claims\Controller\ClaimVoucherController::display'
     _title: 'Display'
   requirements:
-    _permission: 'access content'
+    _custom_access: '\Drupal\pin_codes\Access\PartnersPageAccess::access'
 
 claims.claim_link:
   path: '/claim-link/{nid}'
