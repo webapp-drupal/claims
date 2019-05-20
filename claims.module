@@ -34,18 +34,16 @@ function claims_theme($existing, $type, $theme, $path) {
   ];
 }
 
+
 /**
- * Implements hook_preprocess_node().
+ * Implementation of computed field hook for voucher code.
  */
-function claims_preprocess_node(&$variables) {
-  $node = $variables['node'];
-  if ($node->getType() == 'partners') {
-    $nid = $node->id();
-    $connection = \Drupal::database();
+function computed_field_field_voucher_code_compute($entity_type_manager, $entity, $fields, $delta) {
+  $nid = $entity->id();
+  $connection = \Drupal::database();
 
-    $query = $connection->query('SELECT voucher_code FROM {claim_codes} WHERE partner = :nid LIMIT 1', [':nid' => $nid]);
-    $code = $query->fetchField();
+  $query = $connection->query('SELECT voucher_code FROM {claim_codes} WHERE partner = :nid LIMIT 1', [':nid' => $nid]);
+  $code = $query->fetchField();
 
-    $variables['voucher_code'] = $code;
-  }
+  return $code;
 }
